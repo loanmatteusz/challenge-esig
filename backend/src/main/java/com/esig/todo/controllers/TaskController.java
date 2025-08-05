@@ -1,5 +1,7 @@
 package com.esig.todo.controllers;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,5 +40,14 @@ public class TaskController {
             @AuthenticationPrincipal User authenticatedUser) {
         Task task = this.taskService.getTask(id, authenticatedUser.getId());
         return ResponseEntity.ok(TaskResponseDTO.fromEntity(task));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<TaskResponseDTO>> getAllTasks(@AuthenticationPrincipal User authenticatedUser) {
+        List<Task> tasks = this.taskService.getTasks(authenticatedUser.getId());
+        List<TaskResponseDTO> response = tasks.stream()
+                .map(TaskResponseDTO::fromEntity)
+                .toList();
+        return ResponseEntity.ok(response);
     }
 }

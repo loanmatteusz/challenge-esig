@@ -1,5 +1,7 @@
 package com.esig.todo.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.esig.todo.domain.task.Task;
@@ -31,5 +33,9 @@ public class TaskService {
     public Task getTask(String taskId, String ownerId) {
         return taskRepository.findByIdAndOwnerId(taskId, ownerId)
                 .orElseThrow(TaskNotFoundException::new);
+    }
+
+    public List<Task> getTasks(String ownerId) {
+        return taskRepository.findByOwnerId(ownerId);
     }
 }
