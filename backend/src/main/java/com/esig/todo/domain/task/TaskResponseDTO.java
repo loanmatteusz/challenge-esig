@@ -3,9 +3,10 @@ package com.esig.todo.domain.task;
 import java.time.LocalDate;
 
 public record TaskResponseDTO(
-        String id,
+        Long id,
         String title,
         String description,
+        String responsibleId,
         TaskPriority priority,
         LocalDate deadline,
         String ownerId) {
@@ -15,6 +16,7 @@ public record TaskResponseDTO(
                 task.getId(),
                 task.getTitle(),
                 task.getDescription(),
+                task.getResponsibleId(),
                 task.getPriority(),
                 task.getDeadline(),
                 task.getOwnerId());

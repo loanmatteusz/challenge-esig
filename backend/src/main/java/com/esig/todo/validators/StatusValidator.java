@@ -1,10 +1,10 @@
 package com.esig.todo.validators;
 
-import com.esig.todo.domain.task.TaskPriority;
+import com.esig.todo.domain.task.TaskStatus;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class PriorityValidator implements ConstraintValidator<ValidPriority, String> {
+public class StatusValidator implements ConstraintValidator<ValidStatus, String> {
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
@@ -12,7 +12,7 @@ public class PriorityValidator implements ConstraintValidator<ValidPriority, Str
             return false;
 
         try {
-            TaskPriority.valueOf(value.toUpperCase());
+            TaskStatus.valueOf(value.toUpperCase());
             return true;
         } catch (IllegalArgumentException ex) {
             return false;

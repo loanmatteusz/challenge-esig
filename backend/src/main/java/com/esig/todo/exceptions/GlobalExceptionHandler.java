@@ -33,19 +33,9 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ErrorResponse> handleJsonParseError(HttpMessageNotReadableException ex) {
-        String msg = "Invalid input data";
-        String code = "NOT_VALID_ENUM_VALUE";
-        if (ex.getMostSpecificCause() != null) {
-            String causeMessage = ex.getMostSpecificCause().getMessage();
-            if (causeMessage.contains("TaskPriority")) {
-                code = "INVALID_PRIORITY";
-                msg = "Priority must be one of LOW, MEDIUM, HIGH";
-            } else {
-                msg += ": " + causeMessage;
-            }
-        }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new ErrorResponse(code, msg));
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorResponse("INVALID_JSON", "Invalid request body format"));
     }
 
     @ExceptionHandler(UserAlreadyExistsException.class)

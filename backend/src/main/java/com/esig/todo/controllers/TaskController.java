@@ -43,32 +43,30 @@ public class TaskController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TaskResponseDTO> getTask(@PathVariable String id,
-            @AuthenticationPrincipal User authenticatedUser) {
-        Task task = this.taskService.getTask(id, authenticatedUser.getId());
+    public ResponseEntity<TaskResponseDTO> getTask(@PathVariable Long id) {
+        Task task = this.taskService.getTask(id);
         return ResponseEntity.ok(TaskResponseDTO.fromEntity(task));
     }
 
     @GetMapping
     public ResponseEntity<PaginatedResponse<TaskResponseDTO>> getAllTasks(
-            @AuthenticationPrincipal User authenticatedUser,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
-        Page<Task> taskPage = this.taskService.getTasks(authenticatedUser.getId(), page, size);
+        Page<Task> taskPage = this.taskService.getTasks(page, size);
         PaginatedResponse<TaskResponseDTO> response = PaginationUtils.toPaginatedResponse(taskPage,
                 TaskResponseDTO::fromEntity);
         return ResponseEntity.ok(response);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TaskResponseDTO> updateTask(@PathVariable String id,
+    public ResponseEntity<TaskResponseDTO> updateTask(@PathVariable Long id,
             @RequestBody @Valid UpdateTaskRequestDTO body, @AuthenticationPrincipal User authenticatedUser) {
         Task task = this.taskService.updateTask(id, authenticatedUser.getId(), body);
         return ResponseEntity.ok(TaskResponseDTO.fromEntity(task));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTask(@PathVariable String id,
+    public ResponseEntity<Void> deleteTask(@PathVariable Long id,
             @AuthenticationPrincipal User authenticatedUser) {
         taskService.deleteTask(id, authenticatedUser.getId());
         return ResponseEntity.noContent().build();

@@ -16,14 +16,19 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of = "id")
 public class Task {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id; // Para Task haverá filtro de núemro
 
     private String title;
 
     private String description;
 
     private String ownerId;
+
+    private String responsibleId;
+
+    @Enumerated(EnumType.STRING)
+    private TaskStatus status;
 
     @Enumerated(EnumType.STRING)
     private TaskPriority priority;
@@ -36,6 +41,9 @@ public class Task {
         }
         if (dto.description() != null) {
             this.description = dto.description();
+        }
+        if (dto.status() != null) {
+            this.status = dto.status();
         }
         if (dto.priority() != null) {
             this.priority = dto.priority();
