@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +29,23 @@ public class GlobalExceptionHandler {
             errors.put(error.getField(), error.getDefaultMessage());
         });
         return ResponseEntity.badRequest().body(errors);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ErrorResponse> handleJsonParseError(HttpMessageNotReadableException ex) {
+        String msg = "Invalid input data";
+        String code = "NOT_VALID_ENUM_VALUE";
+        if (ex.getMostSpecificCause() != null) {
+            String causeMessage = ex.getMostSpecificCause().getMessage();
+            if (causeMessage.contains("TaskPriority")) {
+                code = "INVALID_PRIORITY";
+                msg = "Priority must be one of LOW, MEDIUM, HIGH";
+            } else {
+                msg += ": " + causeMessage;
+            }
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorResponse(code, msg));
     }
 
     @ExceptionHandler(UserAlreadyExistsException.class)

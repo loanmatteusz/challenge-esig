@@ -29,4 +29,19 @@ public class Task {
     private TaskPriority priority;
 
     private LocalDate deadline;
+
+    public void updateFrom(UpdateTaskRequestDTO dto) {
+        if (dto.title() != null) {
+            this.title = dto.title();
+        }
+        if (dto.description() != null) {
+            this.description = dto.description();
+        }
+        if (dto.priority() != null) {
+            this.priority = dto.priority();
+        }
+        if (dto.deadline() != null) {
+            this.deadline = dto.deadline();
+        }
+    }
 }

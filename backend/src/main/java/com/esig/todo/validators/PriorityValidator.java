@@ -1,19 +1,16 @@
 package com.esig.todo.validators;
 
+import com.esig.todo.domain.task.TaskPriority;
+
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-import java.util.Arrays;
-import java.util.List;
-
-public class PriorityValidator implements ConstraintValidator<ValidPriority, String> {
-
-    private final List<String> validPriorities = Arrays.asList("LOW", "MEDIUM", "HIGH");
+public class PriorityValidator implements ConstraintValidator<ValidPriority, TaskPriority> {
 
     @Override
-    public boolean isValid(String value, ConstraintValidatorContext context) {
+    public boolean isValid(TaskPriority value, ConstraintValidatorContext context) {
         if (value == null)
             return false;
-        return validPriorities.contains(value.toUpperCase());
+        return true;
     }
 }
