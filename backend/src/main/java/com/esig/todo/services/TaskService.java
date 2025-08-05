@@ -1,13 +1,12 @@
 package com.esig.todo.services;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.esig.todo.domain.task.Task;
-import com.esig.todo.domain.task.TaskPriority;
 import com.esig.todo.domain.task.TaskRequestDTO;
-import com.esig.todo.domain.task.TaskResponseDTO;
 import com.esig.todo.domain.task.UpdateTaskRequestDTO;
 import com.esig.todo.exceptions.customs.TaskNotFoundException;
 import com.esig.todo.repositories.TaskRepository;
@@ -36,8 +35,9 @@ public class TaskService {
                 .orElseThrow(TaskNotFoundException::new);
     }
 
-    public List<Task> getTasks(String ownerId) {
-        return taskRepository.findByOwnerId(ownerId);
+    public Page<Task> getTasks(String ownerId, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return taskRepository.findByOwnerId(ownerId, pageable);
     }
 
     public Task updateTask(String id, String ownerId, UpdateTaskRequestDTO fields) {

@@ -2,6 +2,7 @@ package com.esig.todo.controllers;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,8 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.esig.todo.domain.common.PaginatedResponse;
+import com.esig.todo.domain.common.PaginationUtils;
 import com.esig.todo.domain.task.Task;
 import com.esig.todo.domain.task.TaskRequestDTO;
 import com.esig.todo.domain.task.TaskResponseDTO;
@@ -46,11 +50,13 @@ public class TaskController {
     }
 
     @GetMapping
-    public ResponseEntity<List<TaskResponseDTO>> getAllTasks(@AuthenticationPrincipal User authenticatedUser) {
-        List<Task> tasks = this.taskService.getTasks(authenticatedUser.getId());
-        List<TaskResponseDTO> response = tasks.stream()
-                .map(TaskResponseDTO::fromEntity)
-                .toList();
+    public ResponseEntity<PaginatedResponse<TaskResponseDTO>> getAllTasks(
+            @AuthenticationPrincipal User authenticatedUser,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Page<Task> taskPage = this.taskService.getTasks(authenticatedUser.getId(), page, size);
+        PaginatedResponse<TaskResponseDTO> response = PaginationUtils.toPaginatedResponse(taskPage,
+                TaskResponseDTO::fromEntity);
         return ResponseEntity.ok(response);
     }
 
