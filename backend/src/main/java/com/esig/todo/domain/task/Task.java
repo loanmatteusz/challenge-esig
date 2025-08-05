@@ -43,10 +43,10 @@ public class Task {
             this.description = dto.description();
         }
         if (dto.status() != null) {
-            this.status = dto.status();
+            this.status = TaskStatus.valueOf(dto.status().toUpperCase());
         }
         if (dto.priority() != null) {
-            this.priority = dto.priority();
+            this.priority = TaskPriority.valueOf(dto.priority().toUpperCase());
         }
         if (dto.deadline() != null) {
             this.deadline = dto.deadline();

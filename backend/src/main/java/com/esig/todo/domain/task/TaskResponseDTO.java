@@ -7,6 +7,7 @@ public record TaskResponseDTO(
         String title,
         String description,
         String responsibleId,
+        TaskStatus status,
         TaskPriority priority,
         LocalDate deadline,
         String ownerId) {
@@ -17,6 +18,7 @@ public record TaskResponseDTO(
                 task.getTitle(),
                 task.getDescription(),
                 task.getResponsibleId(),
+                task.getStatus(),
                 task.getPriority(),
                 task.getDeadline(),
                 task.getOwnerId());
