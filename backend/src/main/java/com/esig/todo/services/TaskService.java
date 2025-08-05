@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.esig.todo.domain.task.Task;
 import com.esig.todo.domain.task.TaskPriority;
 import com.esig.todo.domain.task.TaskRequestDTO;
+import com.esig.todo.exceptions.customs.TaskNotFoundException;
 import com.esig.todo.repositories.TaskRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,6 @@ public class TaskService {
     private final TaskRepository taskRepository;
 
     public Task createTask(TaskRequestDTO dto, String ownerId) {
-        System.out.println("ownerId no service: " + ownerId);
         TaskPriority priorityEnum = TaskPriority.valueOf(dto.priority().toUpperCase());
         Task task = new Task(
                 null,
@@ -26,5 +26,10 @@ public class TaskService {
                 priorityEnum,
                 dto.deadline());
         return this.taskRepository.save(task);
+    }
+
+    public Task getTask(String taskId, String ownerId) {
+        return taskRepository.findByIdAndOwnerId(taskId, ownerId)
+                .orElseThrow(TaskNotFoundException::new);
     }
 }

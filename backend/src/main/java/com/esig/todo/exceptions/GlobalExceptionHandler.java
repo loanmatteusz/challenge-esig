@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import com.esig.todo.exceptions.customs.TaskNotFoundException;
 import com.esig.todo.exceptions.customs.UserAlreadyExistsException;
 import com.esig.todo.exceptions.customs.UserNotFoundException;
 
@@ -41,4 +42,9 @@ public class GlobalExceptionHandler {
                 .body(new ErrorResponse("USER_NOT_FOUND", ex.getMessage()));
     }
 
+    @ExceptionHandler(TaskNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleTaskNotFound(TaskNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new ErrorResponse("TASK_NOT_FOUND", ex.getMessage()));
+    }
 }
