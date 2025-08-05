@@ -36,7 +36,7 @@ public class AuthService {
         this.userRepository.save(newUser);
 
         String token = tokenService.generateToken(newUser);
-        return new LoginResponseDTO(newUser.getUsername(), token);
+        return new LoginResponseDTO(token);
     }
 
     public LoginResponseDTO login(LoginRequestDTO body) {
@@ -48,6 +48,6 @@ public class AuthService {
         }
 
         String token = tokenService.generateToken(user);
-        return new LoginResponseDTO(user.getUsername(), token);
+        return new LoginResponseDTO(token);
     }
 }

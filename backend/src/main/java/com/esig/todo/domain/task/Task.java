@@ -1,6 +1,6 @@
 package com.esig.todo.domain.task;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -20,14 +20,13 @@ public class Task {
     private String id;
 
     private String title;
+
     private String description;
 
-    private String useId;
-    private String priority;
-    private Date deadline;
+    private String ownerId;
 
-    // public Product(TaskRequestDTO data){
-    // this.price = data.price();
-    // this.name = data.name();
-    // }
+    @Enumerated(EnumType.STRING)
+    private TaskPriority priority;
+
+    private LocalDate deadline;
 }
