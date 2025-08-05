@@ -30,12 +30,18 @@ public class TaskService {
         return this.taskRepository.save(task);
     }
 
-    public Task getTask(String taskId, String ownerId) {
-        return taskRepository.findByIdAndOwnerId(taskId, ownerId)
+    public Task getTask(String id, String ownerId) {
+        return taskRepository.findByIdAndOwnerId(id, ownerId)
                 .orElseThrow(TaskNotFoundException::new);
     }
 
     public List<Task> getTasks(String ownerId) {
         return taskRepository.findByOwnerId(ownerId);
+    }
+
+    public void deleteTask(String id, String ownerId) {
+        Task task = taskRepository.findByIdAndOwnerId(id, ownerId)
+                .orElseThrow(TaskNotFoundException::new);
+        taskRepository.delete(task);
     }
 }
