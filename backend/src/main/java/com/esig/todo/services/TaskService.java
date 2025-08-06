@@ -8,10 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.esig.todo.domain.task.Task;
 import com.esig.todo.domain.task.TaskFilterDTO;
-import com.esig.todo.domain.task.TaskPriority;
 import com.esig.todo.domain.task.TaskRequestDTO;
 import com.esig.todo.domain.task.TaskSpecifications;
-import com.esig.todo.domain.task.TaskStatus;
 import com.esig.todo.domain.task.UpdateTaskRequestDTO;
 import com.esig.todo.exceptions.customs.TaskNotFoundException;
 import com.esig.todo.repositories.TaskRepository;
@@ -25,18 +23,7 @@ public class TaskService {
     private final TaskRepository taskRepository;
 
     public Task createTask(TaskRequestDTO dto, String ownerId) {
-        TaskStatus statusEnum = TaskStatus.valueOf(dto.status().toUpperCase());
-        TaskPriority priorityEnum = TaskPriority.valueOf(dto.priority().toUpperCase());
-
-        Task task = new Task(
-                null,
-                dto.title(),
-                dto.description(),
-                ownerId,
-                dto.responsibleId(),
-                statusEnum,
-                priorityEnum,
-                dto.deadline());
+        Task task = dto.toEntity(ownerId);
         return this.taskRepository.save(task);
     }
 
