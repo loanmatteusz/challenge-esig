@@ -1,7 +1,5 @@
 package com.esig.todo.controllers;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -26,9 +24,11 @@ import com.esig.todo.domain.task.UpdateTaskRequestDTO;
 import com.esig.todo.domain.user.User;
 import com.esig.todo.services.TaskService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+@Tag(name = "Tasks")
 @RestController
 @RequestMapping("/tasks")
 @RequiredArgsConstructor
