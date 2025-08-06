@@ -3,11 +3,14 @@ package com.esig.todo.services;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.esig.todo.domain.task.Task;
+import com.esig.todo.domain.task.TaskFilterDTO;
 import com.esig.todo.domain.task.TaskPriority;
 import com.esig.todo.domain.task.TaskRequestDTO;
+import com.esig.todo.domain.task.TaskSpecifications;
 import com.esig.todo.domain.task.TaskStatus;
 import com.esig.todo.domain.task.UpdateTaskRequestDTO;
 import com.esig.todo.exceptions.customs.TaskNotFoundException;
@@ -45,6 +48,12 @@ public class TaskService {
     public Page<Task> getTasks(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return taskRepository.findAll(pageable);
+    }
+
+    public Page<Task> getTasksWithFilters(TaskFilterDTO filters, int page, int size) {
+        Specification<Task> spec = TaskSpecifications.withFilters(filters);
+        Pageable pageable = PageRequest.of(page, size);
+        return taskRepository.findAll(spec, pageable);
     }
 
     public Task updateTask(Long id, String ownerId, UpdateTaskRequestDTO fields) {

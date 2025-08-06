@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.esig.todo.domain.common.PaginatedResponse;
 import com.esig.todo.domain.common.PaginationUtils;
 import com.esig.todo.domain.task.Task;
+import com.esig.todo.domain.task.TaskFilterDTO;
 import com.esig.todo.domain.task.TaskRequestDTO;
 import com.esig.todo.domain.task.TaskResponseDTO;
+import com.esig.todo.domain.task.TaskStatus;
 import com.esig.todo.domain.task.UpdateTaskRequestDTO;
 import com.esig.todo.domain.user.User;
 import com.esig.todo.services.TaskService;
@@ -50,9 +52,14 @@ public class TaskController {
 
     @GetMapping
     public ResponseEntity<PaginatedResponse<TaskResponseDTO>> getAllTasks(
+            @RequestParam(required = false) Long id,
+            @RequestParam(required = false) String query,
+            @RequestParam(required = false) String responsibleId,
+            @RequestParam(required = false) TaskStatus status,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
-        Page<Task> taskPage = this.taskService.getTasks(page, size);
+        TaskFilterDTO filters = new TaskFilterDTO(id, query, responsibleId, status);
+        Page<Task> taskPage = this.taskService.getTasksWithFilters(filters, page, size);
         PaginatedResponse<TaskResponseDTO> response = PaginationUtils.toPaginatedResponse(taskPage,
                 TaskResponseDTO::fromEntity);
         return ResponseEntity.ok(response);
