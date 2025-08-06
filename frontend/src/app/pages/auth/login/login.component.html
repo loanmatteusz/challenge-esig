@@ -1,0 +1,38 @@
+<div class="login-page">
+
+  <div class="left-side"></div>
+
+  <div class="right-side">
+
+    <div class="login-container">
+      <nz-card [nzTitle]="'Login'" class="login-card">
+        <form nz-form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+          <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzRequired>Email</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+              <input nz-input formControlName="email"
+                placeholder="Digite seu e-mail" />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzRequired>Senha</nz-form-label>
+            <nz-form-control [nzSpan]="18">
+              <input nz-input type="password" formControlName="password"
+                placeholder="Digite sua senha" />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item>
+            <nz-form-control [nzSpan]="24">
+              <button nz-button nzType="primary"
+                [disabled]="loginForm.invalid">Entrar</button>
+            </nz-form-control>
+          </nz-form-item>
+        </form>
+      </nz-card>
+    </div>
+
+  </div>
+
+</div>
