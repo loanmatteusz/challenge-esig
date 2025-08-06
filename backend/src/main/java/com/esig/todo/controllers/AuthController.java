@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.esig.todo.domain.user.LoginRequestDTO;
-import com.esig.todo.domain.user.RegisterRequestDTO;
+import com.esig.todo.domain.user.dtos.LoginRequestDTO;
+import com.esig.todo.domain.user.dtos.RegisterRequestDTO;
 import com.esig.todo.services.AuthService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;

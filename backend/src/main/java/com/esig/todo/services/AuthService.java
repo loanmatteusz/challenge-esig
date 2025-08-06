@@ -5,10 +5,10 @@ import java.util.Optional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.esig.todo.domain.user.LoginRequestDTO;
-import com.esig.todo.domain.user.LoginResponseDTO;
-import com.esig.todo.domain.user.RegisterRequestDTO;
 import com.esig.todo.domain.user.User;
+import com.esig.todo.domain.user.dtos.LoginRequestDTO;
+import com.esig.todo.domain.user.dtos.LoginResponseDTO;
+import com.esig.todo.domain.user.dtos.RegisterRequestDTO;
 import com.esig.todo.exceptions.customs.UserAlreadyExistsException;
 import com.esig.todo.exceptions.customs.UserNotFoundException;
 import com.esig.todo.infra.security.TokenService;

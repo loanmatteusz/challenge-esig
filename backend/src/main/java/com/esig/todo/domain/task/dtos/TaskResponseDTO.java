@@ -1,6 +1,10 @@
-package com.esig.todo.domain.task;
+package com.esig.todo.domain.task.dtos;
 
 import java.time.LocalDate;
+
+import com.esig.todo.domain.task.Task;
+import com.esig.todo.domain.task.enums.TaskPriority;
+import com.esig.todo.domain.task.enums.TaskStatus;
 
 public record TaskResponseDTO(
         Long id,

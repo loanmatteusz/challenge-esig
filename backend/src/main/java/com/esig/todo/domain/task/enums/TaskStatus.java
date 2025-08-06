@@ -1,4 +1,4 @@
-package com.esig.todo.domain.task;
+package com.esig.todo.domain.task.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;

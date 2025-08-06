@@ -4,6 +4,8 @@ import jakarta.persistence.criteria.Predicate;
 
 import org.springframework.data.jpa.domain.Specification;
 
+import com.esig.todo.domain.task.dtos.TaskFilterDTO;
+
 import java.util.ArrayList;
 import java.util.List;
 

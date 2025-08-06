@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.esig.todo.domain.common.PaginatedResponse;
 import com.esig.todo.domain.common.PaginationUtils;
 import com.esig.todo.domain.task.Task;
-import com.esig.todo.domain.task.TaskFilterDTO;
-import com.esig.todo.domain.task.TaskRequestDTO;
-import com.esig.todo.domain.task.TaskResponseDTO;
-import com.esig.todo.domain.task.TaskStatus;
-import com.esig.todo.domain.task.UpdateTaskRequestDTO;
+import com.esig.todo.domain.task.dtos.TaskFilterDTO;
+import com.esig.todo.domain.task.dtos.TaskRequestDTO;
+import com.esig.todo.domain.task.dtos.TaskResponseDTO;
+import com.esig.todo.domain.task.dtos.UpdateTaskRequestDTO;
+import com.esig.todo.domain.task.enums.TaskStatus;
 import com.esig.todo.domain.user.User;
 import com.esig.todo.services.TaskService;
 

@@ -2,6 +2,10 @@ package com.esig.todo.domain.task;
 
 import java.time.LocalDate;
 
+import com.esig.todo.domain.task.dtos.UpdateTaskRequestDTO;
+import com.esig.todo.domain.task.enums.TaskPriority;
+import com.esig.todo.domain.task.enums.TaskStatus;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

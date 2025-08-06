@@ -7,10 +7,10 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.esig.todo.domain.task.Task;
-import com.esig.todo.domain.task.TaskFilterDTO;
-import com.esig.todo.domain.task.TaskRequestDTO;
 import com.esig.todo.domain.task.TaskSpecifications;
-import com.esig.todo.domain.task.UpdateTaskRequestDTO;
+import com.esig.todo.domain.task.dtos.TaskFilterDTO;
+import com.esig.todo.domain.task.dtos.TaskRequestDTO;
+import com.esig.todo.domain.task.dtos.UpdateTaskRequestDTO;
 import com.esig.todo.exceptions.customs.TaskNotFoundException;
 import com.esig.todo.repositories.TaskRepository;
 

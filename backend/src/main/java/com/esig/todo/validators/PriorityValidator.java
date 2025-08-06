@@ -1,6 +1,7 @@
 package com.esig.todo.validators;
 
-import com.esig.todo.domain.task.TaskPriority;
+import com.esig.todo.domain.task.enums.TaskPriority;
+
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 

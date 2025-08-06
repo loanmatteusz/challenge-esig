@@ -1,4 +1,4 @@
-package com.esig.todo.infra.cors;
+package com.esig.todo.infra.config.cors;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
