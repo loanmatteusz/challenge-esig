@@ -7,12 +7,11 @@
     <div class="register-container">
       <nz-card [nzTitle]="'Registro'" class="register-card">
         <form nz-form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-
           <nz-form-item>
             <nz-form-label [nzSpan]="6" nzRequired>Nome</nz-form-label>
             <nz-form-control [nzSpan]="18">
               <input nz-input formControlName="username"
-                placeholder="Digite seu nome" />
+                placeholder="Digite seu usernome" />
             </nz-form-control>
           </nz-form-item>
 
@@ -43,12 +42,14 @@
 
           <nz-form-item>
             <nz-form-control [nzSpan]="24">
-              <button nz-button nzType="primary"
+              <button nz-button nzBlock nzType="primary"
                 [disabled]="registerForm.invalid">Registrar</button>
             </nz-form-control>
           </nz-form-item>
-
         </form>
+
+        <button nz-button nzBlock nzType="link"
+          [routerLink]="['/login']">Cancelar</button>
       </nz-card>
     </div>
 

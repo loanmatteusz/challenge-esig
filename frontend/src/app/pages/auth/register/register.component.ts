@@ -37,11 +37,8 @@ export class RegisterComponent {
         console.warn('Senhas não conferem!');
         return;
       }
-      console.log('Cadastro enviado:', { username, email, password });
-
       this.authService.register({ username, email, password }).subscribe({
-        next: (response) => {
-          console.log({ response });
+        next: (_) => {
           this.router.navigate(["/login"]);
         }
       });

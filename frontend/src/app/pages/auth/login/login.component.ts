@@ -39,14 +39,10 @@ export class LoginComponent {
 
   public onSubmit(): void {
     if (this.loginForm.valid) {
-      const { email, password } = this.loginForm.value;
-      console.log('Login enviado:', email, password);
-
       this.authService.login(this.loginForm.value).subscribe({
         next: (response) => {
           this.authService.setToken(response.token);
           this.router.navigate(['/tasks']);
-          console.log({ response });
           this.loginForm.reset();
         },
         error: (err) => {
