@@ -1,4 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+
+// @use "ng-zorro-antd/ng-zorro-antd";
+@use "ng-zorro-antd/ng-zorro-antd.dark.css";
+
+$theme: dark;
+
 * {
   margin: 0;
   padding: 0;

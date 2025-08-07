@@ -4,16 +4,15 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
+import { AUTH_PROVIDERS } from '../auth.provider';
 
 @Component({
   selector: 'app-register',
   imports: [
-    ReactiveFormsModule,
-    NzCardModule,
-    NzFormModule,
+    AUTH_PROVIDERS,
   ],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
   public registerForm: FormGroup;

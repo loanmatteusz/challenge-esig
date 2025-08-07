@@ -25,11 +25,18 @@
 
           <nz-form-item>
             <nz-form-control [nzSpan]="24">
-              <button nz-button nzType="primary"
+              <button nz-button nzBlock nzType="primary"
                 [disabled]="loginForm.invalid">Entrar</button>
             </nz-form-control>
           </nz-form-item>
         </form>
+
+        <div>
+          <button nz-button nzBlock nzType="default"
+            [routerLink]="['/register']">
+            Criar Conta
+          </button>
+        </div>
       </nz-card>
     </div>
 

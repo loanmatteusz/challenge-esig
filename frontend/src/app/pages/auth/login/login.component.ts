@@ -1,16 +1,24 @@
+// Angular Core
 import { Component } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+
+// Ng-Zorro
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzInputModule } from 'ng-zorro-antd/input';
+
+// Services
 import { AuthService } from '../../../core/services/auth.service';
-import { Router } from '@angular/router';
+import { AUTH_PROVIDERS } from '../auth.provider';
 
 @Component({
   selector: 'app-login',
+  standalone: true,
   imports: [
-    ReactiveFormsModule,
-    NzCardModule,
-    NzFormModule,
+    AUTH_PROVIDERS,
+    RouterLink,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -39,13 +47,16 @@ export class LoginComponent {
           this.authService.setToken(response.token);
           this.router.navigate(['/tasks']);
           console.log({ response });
+          this.loginForm.reset();
         },
         error: (err) => {
           console.error("Error to try to login: ", err);
         }
       });
-
-      this.loginForm.reset();
     }
+  }
+
+  public goToRegister() {
+    this.router.navigate(['/register']);
   }
 }
