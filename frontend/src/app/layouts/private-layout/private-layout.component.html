@@ -24,7 +24,10 @@
   <nz-layout class="layout-components">
     <nz-header>
       <p>Todo Application</p>
-      <a (click)="logout()">Logout</a>
+      <a (click)="logout()">
+        <nz-icon nzType="star" nzTheme="fill" />
+        Logout
+      </a>
     </nz-header>
     <nz-content>
       <router-outlet></router-outlet>
