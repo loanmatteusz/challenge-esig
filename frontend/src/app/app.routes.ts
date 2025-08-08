@@ -14,8 +14,14 @@ export const routes: Routes = [
     component: PublicLayoutComponent,
     children: [
       { path: '', redirectTo: 'login', pathMatch: 'full' },
-      { path: 'login', component: LoginComponent, canActivate: [redirectIfAuthenticatedGuard] },
-      { path: 'register', component: RegisterComponent, canActivate: [redirectIfAuthenticatedGuard] }
+      {
+        path: 'login', component: LoginComponent,
+        canActivate: [redirectIfAuthenticatedGuard], data: { title: "Login" }
+      },
+      {
+        path: 'register', component: RegisterComponent,
+        canActivate: [redirectIfAuthenticatedGuard], data: { title: "Register" }
+      }
     ]
   },
   {
@@ -23,8 +29,12 @@ export const routes: Routes = [
     component: PrivateLayoutComponent,
     canActivateChild: [authGuard],
     children: [
-      { path: 'tasks', component: TasksComponent },
-      { path: 'users', component: UsersComponent },
+      {
+        path: 'tasks', component: TasksComponent, data: { title: "Tasks" },
+      },
+      {
+        path: 'users', component: UsersComponent, data: { title: "Users" },
+      },
     ]
   },
   { path: '**', redirectTo: '' }
