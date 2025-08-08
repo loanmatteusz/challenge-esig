@@ -6,6 +6,7 @@ import { PrivateLayoutComponent } from './layouts/private-layout/private-layout.
 import { TasksComponent } from './pages/tasks/tasks.component';
 import { authGuard } from './core/guards/auth.guard';
 import { redirectIfAuthenticatedGuard } from './core/guards/redirect-if-authenticated.guard';
+import { UsersComponent } from './pages/users/users.component';
 
 export const routes: Routes = [
   {
@@ -22,7 +23,8 @@ export const routes: Routes = [
     component: PrivateLayoutComponent,
     canActivateChild: [authGuard],
     children: [
-      { path: 'tasks', component: TasksComponent }
+      { path: 'tasks', component: TasksComponent },
+      { path: 'users', component: UsersComponent },
     ]
   },
   { path: '**', redirectTo: '' }

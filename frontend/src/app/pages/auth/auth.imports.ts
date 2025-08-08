@@ -8,7 +8,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 
-export const AUTH_PROVIDERS = [
+export const AUTH_IMPORTS = [
   ReactiveFormsModule,
   RouterModule,
   NzFormModule,

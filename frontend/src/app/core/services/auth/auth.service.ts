@@ -6,7 +6,7 @@ import {
   LoginResponse,
   RegisterPayload,
   RegisterResponse
-} from '../interfaces/auth.interface';
+} from '../../interfaces/auth.interface';
 
 
 @Injectable({

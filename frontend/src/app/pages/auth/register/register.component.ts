@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzFormModule } from 'ng-zorro-antd/form';
-import { AuthService } from '../../../core/services/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AUTH_PROVIDERS } from '../auth.provider';
+
+// Services
+import { AuthService } from '../../../core/services/auth/auth.service';
+
+import { AUTH_IMPORTS } from '../auth.imports';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-register',
   imports: [
-    AUTH_PROVIDERS,
+    AUTH_IMPORTS,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
@@ -21,6 +23,7 @@ export class RegisterComponent {
     private router: Router,
     private authService: AuthService,
     private fb: FormBuilder,
+    private notificationService: NzNotificationService,
   ) {
     this.registerForm = this.fb.group({
       username: ['', Validators.required],
@@ -34,16 +37,20 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       const { username, email, password, confirmPassword } = this.registerForm.value;
       if (password !== confirmPassword) {
-        console.warn('Senhas não conferem!');
+        this.notificationService.warning("PASSWORD MISMATCH", "Passwords aren't equals!");
         return;
       }
       this.authService.register({ username, email, password }).subscribe({
         next: (_) => {
+          this.notificationService.success("SUCCESS", "User created successfuly!");
           this.router.navigate(["/login"]);
+          this.registerForm.reset();
+        },
+        error: (err) => {
+          this.notificationService.error("USER ALREADY EXISTS", err.error.message);
+          console.error({ err });
         }
       });
-
-      this.registerForm.reset();
     }
   }
 }

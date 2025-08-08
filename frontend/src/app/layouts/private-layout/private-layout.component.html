@@ -1,8 +1,32 @@
 <!-- Private Layout -->
-<header>Navbar</header>
-<div class="private-layout">
-  <aside>Sidebar</aside>
-  <section class="main-content">
-    <router-outlet></router-outlet>
-  </section>
-</div>
+<nz-layout>
+  <nz-sider nzCollapsible nzWidth="200px">
+    <div class="logo">LOGO</div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-menu-item [routerLink]="['/tasks']">
+        <nz-icon nzType="file" />
+        <span>Tasks</span>
+      </li>
+      <li nz-menu-item [routerLink]="['/users']">
+        <nz-icon nzType="file" />
+        <span>Users</span>
+      </li>
+      <nz-divider></nz-divider>
+      <li nz-menu-item>
+        <a href="https://github.com/loanmatteusz/challenge-esig" target="_blank"
+          rel="noopener" style="display: flex; align-items: center; gap: 8px;">
+          <nz-icon nzType="file"></nz-icon>
+          <span>Github Repository</span>
+        </a>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>Todo Application</nz-header>
+    <nz-content>
+      <router-outlet></router-outlet>
+    </nz-content>
+    <nz-footer>Ant Design ©{{ date.getFullYear() }} Implement By
+      Angular</nz-footer>
+  </nz-layout>
+</nz-layout>

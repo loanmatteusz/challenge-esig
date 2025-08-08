@@ -1,23 +1,20 @@
 // Angular Core
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-
-// Ng-Zorro
-import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzFormModule } from 'ng-zorro-antd/form';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzInputModule } from 'ng-zorro-antd/input';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // Services
-import { AuthService } from '../../../core/services/auth.service';
-import { AUTH_PROVIDERS } from '../auth.provider';
+import { AuthService } from '../../../core/services/auth/auth.service';
+import { NzNotificationService } from "ng-zorro-antd/notification";
+
+// Provider
+import { AUTH_IMPORTS } from '../auth.imports';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
-    AUTH_PROVIDERS,
+    AUTH_IMPORTS,
     RouterLink,
   ],
   templateUrl: './login.component.html',
@@ -30,6 +27,7 @@ export class LoginComponent {
     private router: Router,
     private authService: AuthService,
     private fb: FormBuilder,
+    private notificationService: NzNotificationService,
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -42,10 +40,12 @@ export class LoginComponent {
       this.authService.login(this.loginForm.value).subscribe({
         next: (response) => {
           this.authService.setToken(response.token);
+          this.notificationService.success("SUCCESS", "You are logged in!");
           this.router.navigate(['/tasks']);
           this.loginForm.reset();
         },
         error: (err) => {
+          this.notificationService.error("FAILED", "Invalid credentials!");
           console.error("Error to try to login: ", err);
         }
       });

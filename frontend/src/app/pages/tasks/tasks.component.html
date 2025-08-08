@@ -1,1 +1,34 @@
-<p>tasks works!</p>
+<div class="tasks-page">
+  <nz-table #basicTable [nzData]="tasks">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Priority</th>
+        <th>Responsible</th>
+        <th>Deadline</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (task of basicTable.data; track task) {
+      <tr>
+        <td>{{ task.id }}</td>
+        <td>{{ task.title }}</td>
+        <td>{{ task.description }}</td>
+        <td>{{ formatStatus(task.status) }}</td>
+        <td>{{ formatPriority(task.priority) }}</td>
+        <td>{{ getResponsibleNameById(task.responsibleId) }}</td>
+        <td>{{ task.deadline }}</td>
+        <td>
+          <a>Update</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a>Delete</a>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </nz-table>
+</div>
