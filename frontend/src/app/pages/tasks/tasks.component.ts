@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 // Ng-Zorro
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 // Task Resources
 import { Task, TaskFilters } from '../../core/interfaces/task.interface';
@@ -17,6 +18,7 @@ import { TaskPriority, TaskStatus } from '../../core/enums/task';
 
 // Components
 import { SearchBarComponent } from "../../components/search-bar/search-bar.component";
+import { CreateTaskModalComponent } from "../../components/create-task-modal/create-task-modal.component";
 import { DeleteTaskModalComponent } from '../../components/delete-task-modal/delete-task-modal.component';
 import { UpdateTaskModalComponent } from "../../components/update-task-modal/update-task-modal.component";
 
@@ -31,7 +33,9 @@ type TableProps = {
   imports: [
     NzDividerModule,
     NzTableModule,
+    NzButtonModule,
     SearchBarComponent,
+    CreateTaskModalComponent,
     UpdateTaskModalComponent,
     DeleteTaskModalComponent,
   ],
@@ -39,6 +43,7 @@ type TableProps = {
   styleUrl: './tasks.component.scss'
 })
 export class TasksComponent implements OnInit {
+  @ViewChild(CreateTaskModalComponent) createTaskModal!: CreateTaskModalComponent;
   @ViewChild(UpdateTaskModalComponent) updateTaskModal!: UpdateTaskModalComponent;
   @ViewChild(DeleteTaskModalComponent) deleteTaskModal!: DeleteTaskModalComponent;
 
@@ -110,6 +115,10 @@ export class TasksComponent implements OnInit {
   public onPageChange(page: number) {
     this.tableProps.pageIndex = page;
     this.getTasks({ ...this.lastFilters, page: page - 1, size: this.tableProps.pageSize });
+  }
+
+  public onCreateClick() {
+    this.createTaskModal.open();
   }
 
   public onUpdateClick(task: Task) {

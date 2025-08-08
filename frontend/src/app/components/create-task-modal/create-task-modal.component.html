@@ -1,0 +1,73 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Create Task"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="confirmCreate()"
+  [nzOkLoading]="isLoading"
+  nzOkText="Create"
+  nzCancelText="Cancel">
+  <ng-container *nzModalContent>
+    <form [formGroup]="createForm" nz-form>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzRequired>Title</nz-form-label>
+        <nz-form-control [nzSpan]="18" nzErrorTip="Please input the title!">
+          <input nz-input formControlName="title"
+            placeholder="Digite um Titulo para a tarefa" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6">Description</nz-form-label>
+        <nz-form-control [nzSpan]="18">
+          <textarea nz-input formControlName="description"
+            placeholder="Descrição da tarefa"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzRequired>Status</nz-form-label>
+        <nz-form-control [nzSpan]="18" nzErrorTip="Please select status!">
+          <nz-select formControlName="status" nzPlaceHolder="Select status">
+            @for (status of statusOptions; track status) {
+            <nz-option
+              [nzValue]="status.value" [nzLabel]="status.label"></nz-option>
+            }
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzRequired>Priority</nz-form-label>
+        <nz-form-control [nzSpan]="18" nzErrorTip="Please select priority!">
+          <nz-select formControlName="priority" nzPlaceHolder="Select priority">
+            @for (priority of priorityOptions; track priority) {
+            <nz-option
+              [nzValue]="priority.value"
+              [nzLabel]="priority.label"></nz-option>
+            }
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzRequired>Responsible</nz-form-label>
+        <nz-form-control [nzSpan]="18" nzErrorTip="Please select responsible!">
+          <nz-select formControlName="responsibleId"
+            nzPlaceHolder="Select responsible">
+            @for (user of users; track user) {
+            <nz-option [nzValue]="user.id"
+              [nzLabel]="user.name"></nz-option>
+            }
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6">Deadline</nz-form-label>
+        <nz-form-control [nzSpan]="18">
+          <input nz-input type="date" formControlName="deadline" />
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </ng-container>
+</nz-modal>

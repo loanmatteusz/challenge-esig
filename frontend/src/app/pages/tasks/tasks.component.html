@@ -1,6 +1,8 @@
 <div class="tasks-page">
   <app-search-bar [users]="users"
     (filters)="onFiltersChanged($event)"></app-search-bar>
+  <button nz-button nzBlock nzType="primary"
+    (click)="onCreateClick()">New</button>
   <nz-table
     #basicTable
     [nzData]="tasks"
@@ -40,6 +42,7 @@
       }
     </tbody>
   </nz-table>
+  <app-create-task-modal (refreshTaskList)="getTasks()"></app-create-task-modal>
   <app-update-task-modal (refreshTaskList)="getTasks()"></app-update-task-modal>
   <app-delete-task-modal (refreshTaskList)="getTasks()"></app-delete-task-modal>
 </div>

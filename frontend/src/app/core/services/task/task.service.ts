@@ -11,6 +11,10 @@ export class TaskService {
 
   constructor(private http: HttpClient) { }
 
+  public createTask(task: Task): Observable<Task> {
+    return this.http.post<Task>(this.apiUrl, task);
+  }
+
   public getTasks(filters?: TaskFilters): Observable<GetTasksResponse> {
     let params = new HttpParams();
     if (filters) {
