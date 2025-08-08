@@ -3,10 +3,10 @@ import { RouterLink, RouterOutlet } from "@angular/router";
 
 // Ng-Zorro
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
-import { NzDividerModule } from 'ng-zorro-antd/divider';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 @Component({
   selector: 'app-private-layout',
@@ -14,11 +14,10 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
     RouterLink,
     RouterOutlet,
     NzBreadCrumbModule,
-    NzIconModule,
     NzMenuModule,
     NzLayoutModule,
     NzIconModule,
-    NzDividerModule
+    NzDividerModule,
   ],
   templateUrl: './private-layout.component.html',
   styleUrl: './private-layout.component.scss'
