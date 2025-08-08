@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 // Ng-Zorro
 import { NzTableModule } from 'ng-zorro-antd/table';
@@ -7,10 +7,17 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 // Task Resources
 import { Task, TaskFilters } from '../../core/interfaces/task.interface';
 import { TaskService } from '../../core/services/task/task.service';
+
+// User Resources
 import { User } from '../../core/interfaces/user.interface';
 import { UserService } from '../../core/services/user/user.service';
+
+// Enums
 import { TaskPriority, TaskStatus } from '../../core/enums/task';
+
+// Components
 import { SearchBarComponent } from "../../components/search-bar/search-bar.component";
+import { DeleteTaskModalComponent } from '../../components/delete-task-modal/delete-task-modal.component';
 
 type TableProps = {
   pageIndex: number;
@@ -20,11 +27,18 @@ type TableProps = {
 
 @Component({
   selector: 'app-tasks',
-  imports: [NzDividerModule, NzTableModule, SearchBarComponent],
+  imports: [
+    NzDividerModule,
+    NzTableModule,
+    SearchBarComponent,
+    DeleteTaskModalComponent,
+  ],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.scss'
 })
 export class TasksComponent implements OnInit {
+  @ViewChild(DeleteTaskModalComponent) deleteTaskModal!: DeleteTaskModalComponent;
+
   public tasks: Task[] = [];
   public users: User[] = [];
 
@@ -93,5 +107,9 @@ export class TasksComponent implements OnInit {
   public onPageChange(page: number) {
     this.tableProps.pageIndex = page;
     this.getTasks({ ...this.lastFilters, page: page - 1, size: this.tableProps.pageSize });
+  }
+
+  public onDeleteClick(task: Task) {
+    this.deleteTaskModal.open(task);
   }
 }

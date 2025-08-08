@@ -34,10 +34,11 @@
         <td>
           <a>Update</a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a>Delete</a>
+          <a (click)="onDeleteClick(task)">Delete</a>
         </td>
       </tr>
       }
     </tbody>
   </nz-table>
+  <app-delete-task-modal (refreshTaskList)="getTasks()"></app-delete-task-modal>
 </div>

@@ -1,0 +1,14 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Confirm Delete"
+  (nzOnOk)="confirmDelete()"
+  (nzOnCancel)="handleCancel()"
+  [nzOkLoading]="isLoading"
+  nzOkText="Delete"
+  nzOkType="primary"
+  nzCancelText="Cancel">
+  <ng-container *nzModalContent>
+    <p>Are you sure you want to delete this task?</p>
+    <p><strong>{{ task?.title || "sei la" }}</strong></p>
+  </ng-container>
+</nz-modal>

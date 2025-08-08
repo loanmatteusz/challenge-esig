@@ -20,6 +20,10 @@ export class TaskService {
         }
       });
     }
-    return this.http.get<GetTasksResponse>(`${this.apiUrl}`, { params });
+    return this.http.get<GetTasksResponse>(this.apiUrl, { params });
+  }
+
+  public deleteTask(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
