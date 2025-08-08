@@ -4,8 +4,11 @@
 }
 
 nz-header {
-  // background: #fff;
-  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  padding: 1em;
 }
 
 nz-content {

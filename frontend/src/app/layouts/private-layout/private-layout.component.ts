@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from "@angular/router";
+import { Router, RouterLink, RouterOutlet } from "@angular/router";
 
 // Ng-Zorro
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
@@ -7,6 +7,7 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { AuthService } from '../../core/services/auth/auth.service';
 
 @Component({
   selector: 'app-private-layout',
@@ -24,4 +25,14 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 })
 export class PrivateLayoutComponent {
   protected readonly date = new Date();
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+  ) { }
+
+  public logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
 }

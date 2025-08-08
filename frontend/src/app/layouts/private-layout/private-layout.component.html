@@ -22,7 +22,10 @@
     </ul>
   </nz-sider>
   <nz-layout class="layout-components">
-    <nz-header>Todo Application</nz-header>
+    <nz-header>
+      <p>Todo Application</p>
+      <a (click)="logout()">Logout</a>
+    </nz-header>
     <nz-content>
       <router-outlet></router-outlet>
     </nz-content>
