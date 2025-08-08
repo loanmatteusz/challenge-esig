@@ -1,5 +1,14 @@
 <div class="tasks-page">
-  <nz-table #basicTable [nzData]="tasks">
+  <app-search-bar [users]="users"
+    (filters)="onFiltersChanged($event)"></app-search-bar>
+  <nz-table
+    #basicTable
+    [nzData]="tasks"
+    [nzPageIndex]="tableProps.pageIndex"
+    [nzPageSize]="tableProps.pageSize"
+    [nzTotal]="tableProps.total"
+    [nzFrontPagination]="false"
+    (nzPageIndexChange)="onPageChange($event)">
     <thead>
       <tr>
         <th>ID</th>

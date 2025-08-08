@@ -5,32 +5,36 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 // Task Resources
-import { Task } from '../../core/interfaces/task.interface';
+import { Task, TaskFilters } from '../../core/interfaces/task.interface';
 import { TaskService } from '../../core/services/task/task.service';
 import { User } from '../../core/interfaces/user.interface';
 import { UserService } from '../../core/services/user/user.service';
+import { TaskPriority, TaskStatus } from '../../core/enums/task';
+import { SearchBarComponent } from "../../components/search-bar/search-bar.component";
 
-enum TaskStatus {
-  PENDING = "Pendente",
-  IN_PROGRESS = "Em progresso",
-  COMPLETED = "Finalizada",
-}
-
-enum TaskPriority {
-  LOW = "Baixa",
-  MEDIUM = "Media",
-  HIGH = "Alta",
+type TableProps = {
+  pageIndex: number;
+  total: number;
+  pageSize: number;
 }
 
 @Component({
   selector: 'app-tasks',
-  imports: [NzDividerModule, NzTableModule],
+  imports: [NzDividerModule, NzTableModule, SearchBarComponent],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.scss'
 })
 export class TasksComponent implements OnInit {
   public tasks: Task[] = [];
   public users: User[] = [];
+
+  public lastFilters: TaskFilters = {};
+
+  public tableProps: TableProps = {
+    pageIndex: 1,
+    total: 0,
+    pageSize: 10,
+  };
 
   constructor(
     private taskService: TaskService,
@@ -42,9 +46,21 @@ export class TasksComponent implements OnInit {
     this.getTasks();
   }
 
-  public getTasks() {
-    this.taskService.getTasks().subscribe((response) => {
+  public getTasks(filters?: TaskFilters) {
+    this.lastFilters = { ...this.lastFilters, ...filters };
+
+    if (this.lastFilters.page === undefined || this.lastFilters.page === null) {
+      this.lastFilters.page = (this.tableProps.pageIndex || 1) - 1;
+    }
+    if (this.lastFilters.size === undefined || this.lastFilters.size === null) {
+      this.lastFilters.size = this.tableProps.pageSize || 10;
+    }
+
+    this.taskService.getTasks(this.lastFilters).subscribe((response) => {
       this.tasks = response.content;
+      this.tableProps.pageIndex = response.page + 1;
+      this.tableProps.pageSize = response.size;
+      this.tableProps.total = response.totalElements;
     });
   }
 
@@ -64,5 +80,18 @@ export class TasksComponent implements OnInit {
 
   public getResponsibleNameById(responsibleId: string): string {
     return this.users.find(user => user.id === responsibleId)?.name!;
+  }
+
+  public onFiltersChanged(filters: TaskFilters) {
+    this.tableProps.pageIndex = 1;
+    filters.page = 0;
+    filters.size = this.tableProps.pageSize;
+
+    this.getTasks(filters);
+  }
+
+  public onPageChange(page: number) {
+    this.tableProps.pageIndex = page;
+    this.getTasks({ ...this.lastFilters, page: page - 1, size: this.tableProps.pageSize });
   }
 }

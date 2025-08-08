@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GetTasksResponse, Task } from '../../interfaces/task.interface';
+import { GetTasksResponse, TaskFilters } from '../../interfaces/task.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,15 @@ export class TaskService {
 
   constructor(private http: HttpClient) { }
 
-  public getTasks(): Observable<GetTasksResponse> {
-    return this.http.get<GetTasksResponse>(this.apiUrl);
+  public getTasks(filters?: TaskFilters): Observable<GetTasksResponse> {
+    let params = new HttpParams();
+    if (filters) {
+      Object.entries(filters).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          params = params.set(key, value.toString());
+        }
+      });
+    }
+    return this.http.get<GetTasksResponse>(`${this.apiUrl}`, { params });
   }
 }

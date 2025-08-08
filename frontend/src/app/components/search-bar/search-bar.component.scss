@@ -1,0 +1,16 @@
+:host ::ng-deep nz-select {
+  width: 100%;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  .selectors {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+  }
+}

@@ -16,3 +16,12 @@ export interface GetTasksResponse {
   totalPages: number;
   last: boolean;
 }
+
+export interface TaskFilters {
+  id?: number;
+  query?: string;
+  responsibleId?: string;
+  status?: 'PENDING' | 'IN_PROGRESS' | 'COMPLETED';
+  page?: number;
+  size?: number;
+}

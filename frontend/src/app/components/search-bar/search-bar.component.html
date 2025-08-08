@@ -1,0 +1,26 @@
+<form nz-form [formGroup]="filterForm" (ngSubmit)="submitForm()"
+  class="filters">
+  <input nz-input placeholder="Número" formControlName="id" type="number" />
+
+  <input nz-input placeholder="Título ou descrição" formControlName="query" />
+
+  <div class="selectors">
+    <nz-select formControlName="responsibleId" placeholder="Responsável">
+      @for (user of users; track user) {
+      <nz-option [nzValue]="user.id"
+        [nzLabel]="user.name"></nz-option>
+      }
+    </nz-select>
+
+    <nz-select formControlName="status" placeholder="Situação">
+      @for (status of statusOptions; track status) {
+      <nz-option [nzValue]="status.value"
+        [nzLabel]="status.label"></nz-option>
+      }
+    </nz-select>
+
+    <button nz-button nzType="primary" htmlType="submit">Buscar</button>
+    <button nz-button nzType="default" (click)="resetForm()"
+      type="button">Limpar</button>
+  </div>
+</form>
