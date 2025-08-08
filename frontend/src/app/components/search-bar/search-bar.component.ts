@@ -18,7 +18,7 @@ import { User } from '../../core/interfaces/user.interface';
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss'
 })
-export class SearchBarComponent implements OnInit {
+export class SearchBarComponent {
   @Input() public users: User[] = [];
   @Output() public filters = new EventEmitter<any>();
 
@@ -37,10 +37,6 @@ export class SearchBarComponent implements OnInit {
       responsibleId: [null],
       status: [null]
     });
-  }
-
-  public ngOnInit() {
-    console.log({ users: this.users });
   }
 
 

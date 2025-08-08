@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GetTasksResponse, TaskFilters } from '../../interfaces/task.interface';
+import { GetTasksResponse, Task, TaskFilters, UpdateTaskResponse } from '../../interfaces/task.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,10 @@ export class TaskService {
       });
     }
     return this.http.get<GetTasksResponse>(this.apiUrl, { params });
+  }
+
+  public updateTask(task: Task): Observable<UpdateTaskResponse> {
+    return this.http.put<UpdateTaskResponse>(`${this.apiUrl}/${task.id}`, task);
   }
 
   public deleteTask(id: number): Observable<void> {

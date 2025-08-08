@@ -32,7 +32,7 @@
         <td>{{ getResponsibleNameById(task.responsibleId) }}</td>
         <td>{{ task.deadline }}</td>
         <td>
-          <a>Update</a>
+          <a (click)="onUpdateClick(task)">Update</a>
           <nz-divider nzType="vertical"></nz-divider>
           <a (click)="onDeleteClick(task)">Delete</a>
         </td>
@@ -40,5 +40,6 @@
       }
     </tbody>
   </nz-table>
+  <app-update-task-modal (refreshTaskList)="getTasks()"></app-update-task-modal>
   <app-delete-task-modal (refreshTaskList)="getTasks()"></app-delete-task-modal>
 </div>

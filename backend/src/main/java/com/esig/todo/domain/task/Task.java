@@ -46,6 +46,9 @@ public class Task {
         if (dto.description() != null) {
             this.description = dto.description();
         }
+        if (dto.responsibleId() != null) {
+            this.responsibleId = dto.responsibleId();
+        }
         if (dto.status() != null) {
             this.status = TaskStatus.valueOf(dto.status().toUpperCase());
         }

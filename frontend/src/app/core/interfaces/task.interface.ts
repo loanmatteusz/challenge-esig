@@ -25,3 +25,14 @@ export interface TaskFilters {
   page?: number;
   size?: number;
 }
+
+export interface UpdateTaskResponse {
+  id: number,
+  title: string;
+  description: string;
+  responsibleId: string;
+  status: string;
+  priority: string;
+  deadline: string;
+  ownerId: string;
+}

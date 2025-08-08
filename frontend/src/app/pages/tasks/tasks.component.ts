@@ -18,6 +18,7 @@ import { TaskPriority, TaskStatus } from '../../core/enums/task';
 // Components
 import { SearchBarComponent } from "../../components/search-bar/search-bar.component";
 import { DeleteTaskModalComponent } from '../../components/delete-task-modal/delete-task-modal.component';
+import { UpdateTaskModalComponent } from "../../components/update-task-modal/update-task-modal.component";
 
 type TableProps = {
   pageIndex: number;
@@ -31,12 +32,14 @@ type TableProps = {
     NzDividerModule,
     NzTableModule,
     SearchBarComponent,
+    UpdateTaskModalComponent,
     DeleteTaskModalComponent,
   ],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.scss'
 })
 export class TasksComponent implements OnInit {
+  @ViewChild(UpdateTaskModalComponent) updateTaskModal!: UpdateTaskModalComponent;
   @ViewChild(DeleteTaskModalComponent) deleteTaskModal!: DeleteTaskModalComponent;
 
   public tasks: Task[] = [];
@@ -107,6 +110,10 @@ export class TasksComponent implements OnInit {
   public onPageChange(page: number) {
     this.tableProps.pageIndex = page;
     this.getTasks({ ...this.lastFilters, page: page - 1, size: this.tableProps.pageSize });
+  }
+
+  public onUpdateClick(task: Task) {
+    this.updateTaskModal.open(task);
   }
 
   public onDeleteClick(task: Task) {
