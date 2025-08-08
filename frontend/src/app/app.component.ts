@@ -32,7 +32,6 @@ export class AppComponent implements OnInit {
         mergeMap(route => route.data)
       )
       .subscribe(data => {
-        console.log({ data });
         if (data['title']) {
           this.titleService.setTitle(`Todo App - ${data['title']}`);
         } else {
