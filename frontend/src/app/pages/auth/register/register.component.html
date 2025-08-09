@@ -42,8 +42,8 @@
 
           <nz-form-item>
             <nz-form-control [nzSpan]="24">
-              <button nz-button nzBlock nzType="primary"
-                [disabled]="registerForm.invalid">Registrar</button>
+              <button nz-button nzBlock nzType="primary" [nzLoading]="isLoading"
+                [disabled]="registerForm.invalid || isLoading">Registrar</button>
             </nz-form-control>
           </nz-form-item>
         </form>

@@ -22,6 +22,7 @@ import { AUTH_IMPORTS } from '../auth.imports';
 })
 export class LoginComponent {
   public loginForm: FormGroup;
+  public isLoading = false;
 
   constructor(
     private router: Router,
@@ -37,16 +38,19 @@ export class LoginComponent {
 
   public onSubmit(): void {
     if (this.loginForm.valid) {
+      this.isLoading = true;
       this.authService.login(this.loginForm.value).subscribe({
         next: (response) => {
           this.authService.setToken(response.token);
           this.notificationService.success("SUCCESS", "You are logged in!");
           this.router.navigate(['/tasks']);
           this.loginForm.reset();
+          this.isLoading = false;
         },
         error: (err) => {
           this.notificationService.error("FAILED", "Invalid credentials!");
           console.error("Error to try to login: ", err);
+          this.isLoading = false;
         }
       });
     }

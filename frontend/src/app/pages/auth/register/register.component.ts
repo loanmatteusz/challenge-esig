@@ -18,6 +18,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 })
 export class RegisterComponent {
   public registerForm: FormGroup;
+  public isLoading: boolean = false;
 
   constructor(
     private router: Router,
@@ -35,6 +36,7 @@ export class RegisterComponent {
 
   public onSubmit(): void {
     if (this.registerForm.valid) {
+      this.isLoading = true;
       const { username, email, password, confirmPassword } = this.registerForm.value;
       if (password !== confirmPassword) {
         this.notificationService.warning("PASSWORD MISMATCH", "Passwords aren't equals!");
@@ -45,10 +47,12 @@ export class RegisterComponent {
           this.notificationService.success("SUCCESS", "User created successfuly!");
           this.router.navigate(["/login"]);
           this.registerForm.reset();
+          this.isLoading = false;
         },
         error: (err) => {
           this.notificationService.error("USER ALREADY EXISTS", err.error.message);
           console.error({ err });
+          this.isLoading = false;
         }
       });
     }

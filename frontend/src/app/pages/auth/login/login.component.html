@@ -25,8 +25,8 @@
 
           <nz-form-item>
             <nz-form-control [nzSpan]="24">
-              <button nz-button nzBlock nzType="primary"
-                [disabled]="loginForm.invalid">Entrar</button>
+              <button nz-button nzBlock nzType="primary" [nzLoading]="isLoading"
+                [disabled]="loginForm.invalid || isLoading">Entrar</button>
             </nz-form-control>
           </nz-form-item>
         </form>
