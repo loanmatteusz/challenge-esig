@@ -1,10 +1,10 @@
-package com.esig.todo_task;
+package com.esig.todo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TodoTaskApplicationTests {
+class TodoApplicationTests {
 
 	@Test
 	void contextLoads() {
