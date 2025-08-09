@@ -1,26 +1,34 @@
 <div class="users-page">
-  <nz-table #basicTable [nzData]="users">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (user of basicTable.data; track user) {
-      <tr>
-        <td>{{ user.id }}</td>
-        <td>{{ user.name }}</td>
-        <td>{{ user.email }}</td>
-        <td>
-          <a>Update</a>
-          <nz-divider nzType="vertical"></nz-divider>
-          <a>Delete</a>
-        </td>
-      </tr>
-      }
-    </tbody>
-  </nz-table>
+  <div class="table-wrapper">
+    <nz-table #basicTable [nzData]="users" [nzShowPagination]="false">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (user of basicTable.data; track user) {
+        <tr>
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            <a>Update</a>
+            <nz-divider nzType="vertical"></nz-divider>
+            <a>Delete</a>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </nz-table>
+  </div>
+  <div class="pagination"
+    style="display: flex; align-items: center; justify-content: end;">
+    <nz-pagination [nzPageIndex]="1"
+      [nzPageSize]="10"
+      [nzTotal]="users.length"></nz-pagination>
+  </div>
 </div>

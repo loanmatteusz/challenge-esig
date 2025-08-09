@@ -1,3 +1,24 @@
 .users-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
   padding: 1em;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+td {
+  max-width: 144px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 600px) {
+  ::ng-deep tr {
+    background-color: #141414;
+  }
 }

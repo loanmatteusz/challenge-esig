@@ -14,3 +14,16 @@
     gap: .5em;
   }
 }
+
+@media (max-width: 768px) {
+  .filters {
+    .selectors {
+      flex-direction: column;
+
+      button {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+}

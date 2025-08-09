@@ -9,10 +9,11 @@ import { User } from '../../core/interfaces/user.interface';
 
 // Services
 import { UserService } from '../../core/services/user/user.service';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
 @Component({
   selector: 'app-users',
-  imports: [NzDividerModule, NzTableModule],
+  imports: [NzDividerModule, NzTableModule, NzPaginationModule],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
 })
