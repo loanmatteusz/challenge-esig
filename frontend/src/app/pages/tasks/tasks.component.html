@@ -3,45 +3,49 @@
     (filters)="onFiltersChanged($event)"></app-search-bar>
   <button nz-button nzBlock nzType="primary"
     (click)="onCreateClick()">New</button>
-  <nz-table
-    #basicTable
-    [nzData]="tasks"
-    [nzPageIndex]="tableProps.pageIndex"
-    [nzPageSize]="tableProps.pageSize"
-    [nzTotal]="tableProps.total"
-    [nzFrontPagination]="false"
-    (nzPageIndexChange)="onPageChange($event)">
-    <thead>
-      <tr>
-        <th>Number</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Status</th>
-        <th>Priority</th>
-        <th>Responsible</th>
-        <th>Deadline</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (task of basicTable.data; track task) {
-      <tr>
-        <td>{{ task.id }}</td>
-        <td>{{ task.title }}</td>
-        <td>{{ task.description }}</td>
-        <td>{{ formatStatus(task.status) }}</td>
-        <td>{{ formatPriority(task.priority) }}</td>
-        <td>{{ getResponsibleNameById(task.responsibleId) }}</td>
-        <td>{{ task.deadline }}</td>
-        <td>
-          <a (click)="onUpdateClick(task)">Update</a>
-          <nz-divider nzType="vertical"></nz-divider>
-          <a (click)="onDeleteClick(task)">Delete</a>
-        </td>
-      </tr>
-      }
-    </tbody>
-  </nz-table>
+  <div class="table-wrapper">
+    <nz-table
+      #sortTable
+      [nzData]="tasks"
+      [nzShowPagination]="false">
+      <thead>
+        <tr>
+          @for (column of columns; track column) {
+          <th [nzSortFn]="column.compare" [nzSortPriority]="column.priority">
+            {{ column.title }}
+          </th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for (task of sortTable.data; track task) {
+        <tr>
+          <td>{{ task.id }}</td>
+          <td>{{ task.title }}</td>
+          <td>
+            {{ task.description }}
+          </td>
+          <td>{{ formatStatus(task.status) }}</td>
+          <td>{{ formatPriority(task.priority) }}</td>
+          <td>{{ getResponsibleNameById(task.responsibleId) }}</td>
+          <td>{{ task.deadline }}</td>
+          <td>
+            <a (click)="onUpdateClick(task)">Update</a>
+            <nz-divider nzType="vertical"></nz-divider>
+            <a (click)="onDeleteClick(task)">Delete</a>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </nz-table>
+  </div>
+  <div class="pagination"
+    style="display: flex; align-items: center; justify-content: end;">
+    <nz-pagination [nzPageIndex]="tableProps.pageIndex"
+      [nzPageSize]="tableProps.pageSize"
+      [nzTotal]="tableProps.total"
+      (nzPageIndexChange)="onPageChange($event)"></nz-pagination>
+  </div>
   <app-create-task-modal (refreshTaskList)="getTasks()"></app-create-task-modal>
   <app-update-task-modal (refreshTaskList)="getTasks()"></app-update-task-modal>
   <app-delete-task-modal (refreshTaskList)="getTasks()"></app-delete-task-modal>

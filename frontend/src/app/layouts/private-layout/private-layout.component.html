@@ -1,6 +1,6 @@
 <!-- Private Layout -->
 <nz-layout>
-  <nz-sider nzCollapsible nzWidth="200px">
+  <nz-sider nzCollapsible nzWidth="200px" [nzBreakpoint]="'md'">
     <div class="logo">LOGO</div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
       <li nz-menu-item [routerLink]="['/tasks']">
@@ -23,16 +23,16 @@
   </nz-sider>
   <nz-layout class="layout-components">
     <nz-header>
-      <p>Todo Application</p>
+      <h3>Todo Application</h3>
       <a (click)="logout()">
-        <nz-icon nzType="star" nzTheme="fill" />
+        <nz-icon nzType="logout" nzTheme="fill" />
         Logout
       </a>
     </nz-header>
     <nz-content>
       <router-outlet></router-outlet>
     </nz-content>
-    <nz-footer>Ant Design ©{{ date.getFullYear() }} Implement By
-      Angular</nz-footer>
+    <!-- <nz-footer>Ant Design ©{{ date.getFullYear() }} Implement By
+      Angular</nz-footer> -->
   </nz-layout>
 </nz-layout>

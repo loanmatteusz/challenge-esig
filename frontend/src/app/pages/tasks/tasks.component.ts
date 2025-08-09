@@ -4,6 +4,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
 // Task Resources
 import { Task, TaskFilters } from '../../core/interfaces/task.interface';
@@ -21,6 +22,7 @@ import { SearchBarComponent } from "../../components/search-bar/search-bar.compo
 import { CreateTaskModalComponent } from "../../components/create-task-modal/create-task-modal.component";
 import { DeleteTaskModalComponent } from '../../components/delete-task-modal/delete-task-modal.component';
 import { UpdateTaskModalComponent } from "../../components/update-task-modal/update-task-modal.component";
+import { ItemData, taskColumns } from './table-columns';
 
 type TableProps = {
   pageIndex: number;
@@ -33,6 +35,7 @@ type TableProps = {
   imports: [
     NzDividerModule,
     NzTableModule,
+    NzPaginationModule,
     NzButtonModule,
     SearchBarComponent,
     CreateTaskModalComponent,
@@ -58,12 +61,15 @@ export class TasksComponent implements OnInit {
     pageSize: 10,
   };
 
+  public columns: any = [];
+
   constructor(
     private taskService: TaskService,
     private userService: UserService,
   ) { }
 
   public ngOnInit(): void {
+    this.columns = taskColumns;
     this.getUsers();
     this.getTasks();
   }

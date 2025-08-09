@@ -5,12 +5,12 @@
 .filters {
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: .5em;
 
   .selectors {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1em;
+    gap: .5em;
   }
 }
