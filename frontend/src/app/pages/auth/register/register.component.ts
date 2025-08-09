@@ -44,7 +44,7 @@ export class RegisterComponent {
       }
       this.authService.register({ username, email, password }).subscribe({
         next: (_) => {
-          this.notificationService.success("SUCCESS", "User created successfuly!");
+          this.notificationService.success("SUCCESS", "User created successfully!");
           this.router.navigate(["/login"]);
           this.registerForm.reset();
           this.isLoading = false;

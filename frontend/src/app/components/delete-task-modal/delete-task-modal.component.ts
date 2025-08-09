@@ -31,7 +31,7 @@ export class DeleteTaskModalComponent {
     this.isLoading = true;
     this.taskService.deleteTask(this.task!.id).subscribe({
       next: () => {
-        this.notificationService.success('SUCCESS', 'Task deleted successfuly!');
+        this.notificationService.success('SUCCESS', 'Task deleted successfully!');
         this.isLoading = false;
         this.isVisible = false;
         this.refreshTaskList.emit();
