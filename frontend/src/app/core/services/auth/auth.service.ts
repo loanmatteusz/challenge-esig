@@ -7,13 +7,14 @@ import {
   RegisterPayload,
   RegisterResponse
 } from '../../interfaces/auth.interface';
+import { environment } from '../../../../environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/auth';
+  private apiUrl = `${environment.apiUrl}/auth`;
 
   constructor(private http: HttpClient) { }
 

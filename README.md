@@ -15,6 +15,10 @@ Projeto simples de gerenciamento de tarefas (Todo) com backend em Spring Boot e 
 - Listagem de usuários
 - Documentação da API disponível via Swagger
 
+## Deploys
+- Backend (Render): https://challenge-esig.onrender.com/swagger-ui/index.html
+- Frontend (Vercel): https://challenge-esig.vercel.app/
+
 ## Como rodar
 
 1. Clone o repositório
