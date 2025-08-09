@@ -40,8 +40,8 @@ http://localhost:8080/swagger-ui/index.html
 ```
 
 ### Tecnologias
-Java 21 / Spring Boot
-Spring Security
-Swagger (OpenAPI)
-Angular 19
-Docker / Docker Compose
+- Java 21 / Spring Boot
+- Spring Security
+- Swagger (OpenAPI)
+- Angular 19
+- Docker / Docker Compose
