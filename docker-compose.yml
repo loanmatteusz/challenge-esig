@@ -26,12 +26,12 @@ services:
       - database
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     container_name: angular_frontend
     ports:
       - "4200:4200"
-    volumes:
-      - /app/node_modules
     depends_on:
       - backend
 
