@@ -31,6 +31,8 @@ cd challenge-esig
 2. Execute o docker-compose para subir backend e frontend:
 ```bash
 docker-compose up --build
+# ou
+docker compose up --build
 ```
 
 3. Acesse o frontend no navegador:
